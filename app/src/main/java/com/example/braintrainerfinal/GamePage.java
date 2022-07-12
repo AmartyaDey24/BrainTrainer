@@ -1,6 +1,7 @@
 package com.example.braintrainerfinal;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +21,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Random;
 
+import io.branch.indexing.BranchUniversalObject;
+import io.branch.referral.Branch;
+import io.branch.referral.BranchError;
+import io.branch.referral.util.LinkProperties;
+
 public class GamePage extends AppCompatActivity {
 
     TextView timer,score,question,results;
@@ -32,6 +38,30 @@ public class GamePage extends AppCompatActivity {
 
     int correctAnswer;
     ArrayList<Integer> answers = new ArrayList<Integer>();
+
+    public static int TIME_INTERVAL = 2000;
+    private long backPressed;
+
+    @Override
+    public void onBackPressed() {
+        if (backPressed + TIME_INTERVAL > System.currentTimeMillis()){
+            super.onBackPressed();
+            return;
+        } else
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+
+        backPressed = System.currentTimeMillis();
+    }
+
+    public void Share (View view){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        String body = "Download this App";
+        String sub = "https://50x3h.app.link/4DoCs94DBrb";
+        intent.putExtra(Intent.EXTRA_TEXT,body);
+        intent.putExtra(Intent.EXTRA_TEXT,sub);
+        startActivity(Intent.createChooser(intent,"Share Using"));
+    }
 
     public void playAgain(View view){
         restart.setVisibility(View.INVISIBLE);

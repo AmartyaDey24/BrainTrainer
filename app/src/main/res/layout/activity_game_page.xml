@@ -12,22 +12,26 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:background="#C1AB80"
         android:gravity="center"
         android:text="10s"
         android:textColor="#434040"
         android:textSize="40sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/exit"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/score"
         android:layout_width="127dp"
         android:layout_height="85dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
         android:background="#D8A5A5"
         android:gravity="center"
@@ -35,16 +39,18 @@
         android:textColor="#434040"
         android:textSize="32sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/exit"
         app:layout_constraintStart_toEndOf="@+id/timer"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/question"
         android:layout_width="141dp"
         android:layout_height="76dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/baloo"
         android:gravity="center"
@@ -52,9 +58,11 @@
         android:textColor="#434040"
         android:textSize="40sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/score"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gridLayout"
@@ -65,9 +73,11 @@
         android:layout_marginEnd="16dp"
         android:background="#EFEEB2"
         app:columnCount="2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question"
+        app:layout_constraintVertical_bias="0.0"
         app:rowCount="2">
 
         <Button
@@ -157,20 +167,41 @@
         android:textSize="25sp"
         android:textStyle="bold|italic"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/exit"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
         android:background="@android:color/transparent"
         android:onClick="exit"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/exit" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/Share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:clickable="true"
+        android:onClick="Share"
+        app:backgroundTint="#EFEEB2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/results"
+        app:srcCompat="@android:drawable/ic_menu_share" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

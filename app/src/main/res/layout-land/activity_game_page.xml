@@ -19,8 +19,12 @@
         android:textColor="#434040"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/exit"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/score"
@@ -35,9 +39,11 @@
         android:textColor="#434040"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/exit"
         app:layout_constraintStart_toEndOf="@+id/timer"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/question"
@@ -65,9 +71,11 @@
         android:layout_marginEnd="16dp"
         android:background="#EFEEB2"
         app:columnCount="2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question"
+        app:layout_constraintVertical_bias="0.0"
         app:rowCount="2">
 
         <Button
@@ -168,12 +176,16 @@
         android:id="@+id/exit"
         android:layout_width="48dp"
         android:layout_height="67dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
         android:onClick="exit"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/exit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
