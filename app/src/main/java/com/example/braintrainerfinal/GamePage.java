@@ -4,6 +4,7 @@ package com.example.braintrainerfinal;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +25,9 @@ import java.util.Random;
 import io.branch.indexing.BranchUniversalObject;
 import io.branch.referral.Branch;
 import io.branch.referral.BranchError;
+import io.branch.referral.SharingHelper;
 import io.branch.referral.util.LinkProperties;
+import io.branch.referral.util.ShareSheetStyle;
 
 public class GamePage extends AppCompatActivity {
 
@@ -32,15 +35,20 @@ public class GamePage extends AppCompatActivity {
     Button option0,option1,option2,option3,restart;
     ImageButton exit;
     CountDownTimer countDownTimer;
+    public BranchUniversalObject branchUniversalObject;
 
     int IntScore = 0;
     int numOfQuestion = 0;
+    public static int finalScore = 0, finalNumOfQuestions = 0;
 
     int correctAnswer;
     ArrayList<Integer> answers = new ArrayList<Integer>();
 
     public static int TIME_INTERVAL = 2000;
     private long backPressed;
+
+    public GamePage() {
+    }
 
     @Override
     public void onBackPressed() {
@@ -54,6 +62,7 @@ public class GamePage extends AppCompatActivity {
     }
 
     public void Share (View view){
+//        ShareApp();
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         String body = "Download this App";
@@ -61,6 +70,51 @@ public class GamePage extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_TEXT,body);
         intent.putExtra(Intent.EXTRA_TEXT,sub);
         startActivity(Intent.createChooser(intent,"Share Using"));
+    }
+
+    public void ShareApp(){
+        LinkProperties lp = new LinkProperties()
+                .setChannel("brainTrainer")
+                .setFeature("sharing")
+                .setCampaign("content 123 launch")
+                .setStage("new user")
+                .addControlParameter("$desktop_url", "brainTrainer/view/");
+
+        String shareTitle = "Checkout my calculation score" + finalScore + "/" + finalNumOfQuestions;
+        String shareMessage = "I have just completed " + finalNumOfQuestions + " questions in 30 sec of time!!";
+
+        ShareSheetStyle shareSheetStyle =new ShareSheetStyle(GamePage.this,shareTitle,shareMessage)
+                .setCopyUrlStyle(ContextCompat.getDrawable(this, android.R.drawable.ic_menu_send), "Copy", "Added to clipboard")
+                .setMoreOptionStyle(ContextCompat.getDrawable(this, android.R.drawable.ic_menu_search), "Show more")
+                .addPreferredSharingOption(SharingHelper.SHARE_WITH.FACEBOOK)
+                .addPreferredSharingOption(SharingHelper.SHARE_WITH.EMAIL)
+                .addPreferredSharingOption(SharingHelper.SHARE_WITH.MESSAGE)
+                .addPreferredSharingOption(SharingHelper.SHARE_WITH.HANGOUT)
+                .setAsFullWidthStyle(true)
+                .setSharingTitle("Share With");
+
+        branchUniversalObject.showShareSheet(this, lp, shareSheetStyle, new Branch.BranchLinkShareListener() {
+            @Override
+            public void onShareLinkDialogLaunched() {
+
+            }
+
+            @Override
+            public void onShareLinkDialogDismissed() {
+
+            }
+
+            @Override
+            public void onLinkShareResponse(String sharedLink, String sharedChannel, BranchError error) {
+
+            }
+
+            @Override
+            public void onChannelSelected(String channelName) {
+
+            }
+        });
+
     }
 
     public void playAgain(View view){
@@ -89,6 +143,8 @@ public class GamePage extends AppCompatActivity {
         }
         numOfQuestion++;
         score.setText(Integer.toString(IntScore) + "/" + Integer.toString(numOfQuestion));
+        finalNumOfQuestions = numOfQuestion;
+        finalScore = IntScore;
         newQuestion();
     }
 
